@@ -1,0 +1,50 @@
+/* Standard Reset */
+html, body, .c1 { 
+    background: #e2e8f0; 
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden; 
+    font-family: sans-serif; 
+}
+
+/* Container */
+.c1 { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    transition: background .8s; 
+}
+.c1.l { background: 0 0; }
+
+/* Image Wrapper */
+.f1 { 
+    flex: 1; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+/* The Image */
+.f1 img { 
+    position: absolute; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    opacity: 0; 
+    transition: opacity .8s; 
+}
+.f1 img.v { opacity: 1; }
+
+/* The Caption */
+.cap { 
+    position: absolute; 
+    bottom: 0; left: 0; right: 0; 
+    padding: 12px; 
+    text-align: center; 
+    font-size: 14px; 
+    color: #fff; 
+    background: 0 0; 
+    transition: background .8s; 
+    z-index: 10; 
+}
+.v-cap { background: rgba(22, 19, 44, .4) !important; }
