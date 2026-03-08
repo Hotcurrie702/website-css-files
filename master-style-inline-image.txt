@@ -3,20 +3,19 @@ html, body {
     margin: 0 !important; 
     padding: 0 !important;
     width: 100%;
-    overflow: hidden !important;
     background: #e2e8f0;
     font-family: sans-serif;
 }
 
-/* Base height for Desktop */
-html, body, .c1, .f1, .f1 img {
-    height: 100% !important;
+/* --- DESKTOP SETTINGS (Default) --- */
+.c1, .f1 { 
+    height: 550px !important; 
 }
 
-/* --- MOBILE VERSION --- */
+/* --- MOBILE SETTINGS --- */
 @media screen and (max-width: 600px) {
-    html, body, .c1, .f1, .f1 img {
-        height: 100% !important;
+    .c1, .f1 { 
+        height: 250px !important; 
     }
 }
 
@@ -42,6 +41,7 @@ html, body, .c1, .f1, .f1 img {
     top: 0; 
     left: 0; 
     width: 100%; 
+    height: 100% !important; /* Fills the 550px or 250px container */
     object-fit: cover !important; 
     display: block; 
     opacity: 0; 
@@ -50,7 +50,7 @@ html, body, .c1, .f1, .f1 img {
 
 .f1 img.v { opacity: 1; }
 
-/* Caption stays pinned to the bottom of whatever height is active */
+/* Caption stays pinned to the bottom of the active height */
 .cap { 
     position: absolute; 
     bottom: 0; 
@@ -58,10 +58,9 @@ html, body, .c1, .f1, .f1 img {
     right: 0; 
     padding: 10px; 
     text-align: center; 
-    font-size: 13px; /* Slightly smaller for better mobile fit */
+    font-size: 13px;
     color: #fff; 
     z-index: 10; 
 }
 
 .v-cap { background: rgba(22, 19, 44, 0.4) !important; }
-
