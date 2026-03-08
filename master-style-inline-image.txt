@@ -10,13 +10,13 @@ html, body {
 
 /* Base height for Desktop */
 html, body, .c1, .f1, .f1 img {
-    height: 550px !important;
+    height: 100% !important;
 }
 
 /* --- MOBILE VERSION --- */
 @media screen and (max-width: 600px) {
     html, body, .c1, .f1, .f1 img {
-        height: 250px !important;
+        height: 100% !important;
     }
 }
 
@@ -64,3 +64,4 @@ html, body, .c1, .f1, .f1 img {
 }
 
 .v-cap { background: rgba(22, 19, 44, 0.4) !important; }
+
