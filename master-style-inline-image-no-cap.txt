@@ -9,7 +9,7 @@ html, body {
 
 /* Base height for Desktop */
 html, body, .c2, .f2, .f2 img {
-    height: 550px !important;
+    height: 100% !important;
 }
 
 /* --- MOBILE VERSION --- */
@@ -46,5 +46,6 @@ html, body, .c2, .f2, .f2 img {
     opacity: 0; 
     transition: opacity .8s; 
 }
+
 
 .f2 img.v { opacity: 1; }
