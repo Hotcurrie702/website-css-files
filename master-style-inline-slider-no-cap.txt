@@ -1,4 +1,4 @@
-/* GitHub Hosted Slider Styles */
+/* GitHub Hosted Slider Styles - No Captions */
 body {
     background: #e2e8f0 !important;
     margin: 0;
@@ -23,24 +23,20 @@ body.loaded {
     flex-grow: 1;
     position: relative;
     overflow: hidden;
-    width: 100%;
-    height: 100%;
 }
 
 .s {
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    z-index: 1;
 }
 
 .s.a.r {
     opacity: 1;
-    z-index: 2;
+    z-index: 1;
 }
 
 .s img {
@@ -52,33 +48,26 @@ body.loaded {
 
 .nav {
     position: absolute;
-    bottom: 30px; /* Adjusted since captions are removed */
+    bottom: 25px;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     z-index: 20;
 }
 
 .nav a {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(0,0,0,0.1);
     cursor: pointer;
-    transition: all .3s ease;
+    transition: .3s;
 }
 
 .nav a.active {
     background: #fff;
-    transform: scale(1.2);
-    box-shadow: 0 0 8px rgba(0,0,0,0.3);
-}
-
-/* Responsive adjustment for desktop if you want dots below image */
-@media(min-width: 601px) {
-    .nav {
-        bottom: 20px;
-    }
+    transform: scale(1.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
