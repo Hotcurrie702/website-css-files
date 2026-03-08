@@ -1,48 +1,49 @@
-/* Standard Reset */
+/* Kill the scrollbars at the browser level inside the iFrame */
 html, body { 
-    margin: 0; 
-    padding: 0;
-    height: 550px; 
-    overflow: hidden; /* This kills the outer scrollbar */
+    margin: 0 !important; 
+    padding: 0 !important;
+    height: 550px !important; 
+    width: 100%;
+    overflow: hidden !important; /* The scrollbar killer */
     background: #e2e8f0;
-    font-family: sans-serif;
 }
 
-/* Container */
+/* Force the container to a fixed pixel height */
 .c1 { 
-    position: relative;
     display: flex; 
     flex-direction: column; 
+    height: 550px !important; 
     width: 100%;
-    height: 550px; 
-    overflow: hidden; /* This kills the inner scrollbar */
-    transition: background .8s; 
-}
-.c1.l { background: transparent; }
-
-/* Image Wrapper */
-.f1 { 
     position: relative;
-    width: 100%;
-    height: 550px; 
     overflow: hidden;
 }
 
-/* The Image */
+/* The Image Wrapper */
+.f1 { 
+    position: relative;
+    height: 550px !important; 
+    width: 100%;
+    overflow: hidden;
+}
+
+/* The Image - Fixed height is required for object-fit: cover to work */
 .f1 img { 
     position: absolute; 
     top: 0; 
     left: 0; 
     width: 100%; 
-    height: 550px; 
-    object-fit: cover; /* Now it has a fixed height to reference */
+    height: 550px !important; 
+    object-fit: cover !important; 
     display: block; 
     opacity: 0; 
     transition: opacity .8s; 
 }
-.f1 img.v { opacity: 1; }
 
-/* The Caption */
+.f1 img.v { 
+    opacity: 1; 
+}
+
+/* Caption */
 .cap { 
     position: absolute; 
     bottom: 0; 
@@ -52,9 +53,9 @@ html, body {
     text-align: center; 
     font-size: 14px; 
     color: #fff; 
-    background: transparent; 
-    transition: background .8s; 
     z-index: 10; 
 }
 
-.v-cap { background: rgba(22, 19, 44, .4) !important; }
+.v-cap { 
+    background: rgba(22, 19, 44, 0.4) !important; 
+}
