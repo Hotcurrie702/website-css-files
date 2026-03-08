@@ -3,18 +3,18 @@ html, body {
     margin: 0 !important; 
     padding: 0 !important;
     width: 100%;
-    overflow: hidden !important;
+    /* Removed: overflow: hidden and height: 550px */
     background: #e2e8f0;
 }
 
-/* --- DESKTOP HEIGHT (Fixed at 550px) --- */
-html, body, .c2, .f2, .f2 img {
+/* --- DESKTOP HEIGHT (Container Only) --- */
+.c2, .f2, .f2 img {
     height: 550px !important;
 }
 
-/* --- MOBILE HEIGHT (Fixed at 250px) --- */
+/* --- MOBILE HEIGHT (Container Only) --- */
 @media screen and (max-width: 600px) {
-    html, body, .c2, .f2, .f2 img {
+    .c2, .f2, .f2 img {
         height: 250px !important;
     }
 }
@@ -25,7 +25,7 @@ html, body, .c2, .f2, .f2 img {
     flex-direction: column; 
     width: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Clips the image if it tries to leak out */
     transition: background .8s; 
 }
 .c2.loaded { background: transparent; }
@@ -41,7 +41,7 @@ html, body, .c2, .f2, .f2 img {
     top: 0; 
     left: 0; 
     width: 100%; 
-    object-fit: cover !important; 
+    object-fit: cover !important; /* Ensures image fills space without stretching */
     display: block; 
     opacity: 0; 
     transition: opacity .8s; 
