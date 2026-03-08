@@ -1,22 +1,20 @@
-/* Base Layout & Background Transition */
-body {
-  background: #e2e8f0 !important;
+/* Optimized for Wix HTML Box */
+body, html {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   font-family: sans-serif;
-  transition: background 0.8s ease;
 }
 
-body.loaded {
-  background: #fff !important;
-}
-
-/* Wrapper and Slider Container */
 .w {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background: #fff;
 }
 
 .f {
@@ -25,14 +23,14 @@ body.loaded {
   overflow: hidden;
 }
 
-/* Slide States */
 .s {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1s ease-in-out;
 }
 
 .s.a.r {
@@ -47,10 +45,9 @@ body.loaded {
   display: block;
 }
 
-/* Navigation Dots */
 .nav {
   position: absolute;
-  bottom: 65px;
+  bottom: 60px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -59,55 +56,39 @@ body.loaded {
 }
 
 .nav a {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: 0.3s;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .nav a.active {
   background: #fff;
-  transform: scale(1.3);
+  transform: scale(1.2);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
-/* Captions */
 .cap {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 15px 10px;
+  padding: 12px;
   font: italic 14px sans-serif;
   color: #222;
   text-align: center;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   box-sizing: border-box;
   z-index: 10;
-  min-height: 50px;
+  min-height: 45px;
   transition: opacity 0.4s;
 }
 
-/* Desktop & Tablet Adjustments */
-@media (min-width: 601px) {
-  .cap {
-    position: relative;
-    background: transparent;
-    color: #444;
-    padding-top: 10px;
-  }
-  
-  .nav {
-    position: relative;
-    bottom: auto;
-    margin-top: 10px;
-  }
-  
-  .nav a {
-    background: rgba(0, 0, 0, 0.2);
-  }
-  
-  .nav a.active {
-    background: #333;
-  }
+@media(min-width: 601px) {
+  .cap { position: relative; background: #fff; color: #444; }
+  .nav { position: relative; bottom: auto; margin: 10px 0; }
+  .nav a { background: rgba(0, 0, 0, 0.2); }
+  .nav a.active { background: #333; }
 }
