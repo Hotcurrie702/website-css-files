@@ -7,12 +7,12 @@ html, body {
     background: #e2e8f0;
 }
 
-/* Base height for Desktop */
+/* --- DESKTOP HEIGHT (Fixed at 550px) --- */
 html, body, .c2, .f2, .f2 img {
-    height: 100% !important;
+    height: 550px !important;
 }
 
-/* --- MOBILE VERSION --- */
+/* --- MOBILE HEIGHT (Fixed at 250px) --- */
 @media screen and (max-width: 600px) {
     html, body, .c2, .f2, .f2 img {
         height: 250px !important;
@@ -46,6 +46,5 @@ html, body, .c2, .f2, .f2 img {
     opacity: 0; 
     transition: opacity .8s; 
 }
-
 
 .f2 img.v { opacity: 1; }
