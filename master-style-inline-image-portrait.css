@@ -16,13 +16,13 @@ html, body {
 }
 
 /* --- MOBILE SETTINGS --- */
-/* Target: 250px wide by 350px tall 
-@media screen and (max-width: 250px) {
+/* Target: 250px wide by 350px tall */
+@media screen and (max-width: 600px) {
     .c1, .f1 { 
         width: 250px !important;
         height: 350px !important; 
     }
-}*/
+}
 
 /* Container & Wrapper logic */
 .c1 { 
