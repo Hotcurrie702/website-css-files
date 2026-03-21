@@ -11,7 +11,7 @@ html, body {
 /* Target: 350px wide by 550px tall */
 .c1, .f1 { 
     width: 350px !important;
-    height: 550px !important; 
+    height: 650px !important; 
     margin: 0 auto; /* Centers the portrait container */
 }
 
