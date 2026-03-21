@@ -34,6 +34,7 @@ html, body {
     transition: background .8s; 
 }
 
+/* --- Updated Logic Section --- */
 .f1 img { 
     position: absolute; 
     top: 0; 
@@ -41,6 +42,8 @@ html, body {
     width: 100% !important; 
     height: 100% !important; 
     object-fit: cover !important; 
+    /* Default is center; no !important here so inline can override it */
+    object-position: center; 
     display: block; 
     opacity: 0; 
     transition: opacity .8s; 
