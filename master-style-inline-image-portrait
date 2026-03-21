@@ -1,0 +1,69 @@
+/* Standard Reset */
+html, body { 
+    margin: 0 !important; 
+    padding: 0 !important;
+    width: 100%;
+    background: #e2e8f0;
+    font-family: sans-serif;
+}
+
+/* --- DESKTOP SETTINGS (Default) --- */
+/* Target: 350px wide by 550px tall */
+.c1, .f1 { 
+    width: 350px !important;
+    height: 550px !important; 
+    margin: 0 auto; /* Centers the portrait container */
+}
+
+/* --- MOBILE SETTINGS --- */
+/* Target: 250px wide by 350px tall */
+@media screen and (max-width: 600px) {
+    .c1, .f1 { 
+        width: 250px !important;
+        height: 350px !important; 
+    }
+}
+
+/* Container & Wrapper logic */
+.c1 { 
+    display: flex; 
+    flex-direction: column; 
+    position: relative;
+    overflow: hidden;
+    transition: background .8s; 
+}
+.c1.l { background: transparent; }
+
+.f1 { 
+    position: relative;
+    overflow: hidden;
+}
+
+.f1 img { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    display: block; 
+    opacity: 0; 
+    transition: opacity .8s; 
+}
+
+.f1 img.v { opacity: 1; }
+
+/* Caption stays pinned to the bottom of the active height */
+.cap { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    padding: 10px; 
+    text-align: center; 
+    font-size: 13px;
+    color: #fff; 
+    z-index: 10; 
+}
+
+.v-cap { background: rgba(22, 19, 44, 0.4) !important; }
