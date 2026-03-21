@@ -3,47 +3,42 @@ html, body {
     margin: 0 !important; 
     padding: 0 !important;
     width: 100%;
-    background: transparent;
+    background: transparent; /* Changed to transparent for Wix integration */
     font-family: sans-serif;
+    overflow: hidden; /* Prevents double scrollbars in Wix boxes */
 }
 
-/* --- DESKTOP SETTINGS (Default) --- */
-/* Target: 350px wide by 550px tall */
+/* --- DESKTOP SETTINGS (Base State) --- */
+/* We define these first so they are the default */
 .c1, .f1 { 
     width: 350px !important;
-    height: 650px !important; 
-    margin: 0 auto; /* Centers the portrait container */
+    height: 550px !important; 
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 /* --- MOBILE SETTINGS --- */
-/* Target: 250px wide by 350px tall */
-@media screen and (max-width: 600px) {
+/* Target mobile devices specifically by screen width */
+@media screen and (max-width: 767px) {
     .c1, .f1 { 
         width: 250px !important;
         height: 350px !important; 
     }
 }
 
-/* Container & Wrapper logic */
+/* --- LOGIC --- */
 .c1 { 
     display: flex; 
     flex-direction: column; 
-    position: relative;
-    overflow: hidden;
     transition: background .8s; 
-}
-.c1.l { background: transparent; }
-
-.f1 { 
-    position: relative;
-    overflow: hidden;
 }
 
 .f1 img { 
     position: absolute; 
     top: 0; 
     left: 0; 
-    width: 100%; 
+    width: 100% !important; 
     height: 100% !important; 
     object-fit: cover !important; 
     display: block; 
@@ -53,7 +48,6 @@ html, body {
 
 .f1 img.v { opacity: 1; }
 
-/* Caption stays pinned to the bottom of the active height */
 .cap { 
     position: absolute; 
     bottom: 0; 
@@ -64,6 +58,5 @@ html, body {
     font-size: 13px;
     color: #fff; 
     z-index: 10; 
+    background: rgba(22, 19, 44, 0.4);
 }
-
-.v-cap { background: rgba(22, 19, 44, 0.4) !important; }
