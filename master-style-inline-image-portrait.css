@@ -20,7 +20,7 @@ html, body {
 
 /* --- MOBILE SETTINGS --- */
 /* Target mobile devices specifically by screen width */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 300px) {
     .c1, .f1 { 
         width: 250px !important;
         height: 350px !important; 
