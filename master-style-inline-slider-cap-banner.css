@@ -1,1 +1,98 @@
-body{background:#e2e8f0!important;margin:0;height:auto;overflow:hidden;font-family:sans-serif;transition:background .8s ease}body.loaded{background:#fff!important}.w{display:flex;flex-direction:column;height:250px;position:relative;width:100%}@media(min-width:600px){.w{height:550px}}.f{flex-grow:1;position:relative;overflow:hidden;height:100%}.s{position:absolute;top:0;width:100%;height:100%;opacity:0;transition:opacity 1s}.s.a.r{opacity:1;z-index:1}.s img{width:100%;height:100%;object-fit:cover;display:block}.overlay-bar{position:absolute;bottom:0;width:100%;padding:12px 20px;background:rgba(22,19,44,.4);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;box-sizing:border-box;backdrop-filter:blur(3px)}.nav{display:flex;gap:8px;justify-content:center}.nav a{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:.3s}.nav a.active{background:#fff;transform:scale(1.2)}.cap{color:#fff;font:italic 14px sans-serif;text-align:center;transition:opacity .4s;margin:0}
+body {
+  background: #e2e8f0 !important;
+  margin: 0;
+  height: auto;
+  overflow: hidden;
+  font-family: sans-serif;
+  transition: background 0.8s ease;
+}
+
+body.loaded {
+  background: #fff !important;
+}
+
+/* --- DESKTOP SETTINGS (Default) --- */
+.w, .f {
+  display: flex;
+  flex-direction: column;
+  height: 550px !important; /* Updated to match your desktop height */
+  position: relative;
+  width: 100%;
+}
+
+.f {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- MOBILE SETTINGS --- */
+@media screen and (max-width: 600px) {
+  .w, .f {
+    height: 250px !important; /* Updated to match your mobile height */
+  }
+}
+
+.s {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.s.a.r {
+  opacity: 1;
+  z-index: 1;
+}
+
+.s img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 20px;
+  background: rgba(22, 19, 44, 0.4);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  backdrop-filter: blur(3px);
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.nav a {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav a.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+.cap {
+  color: #fff;
+  font: italic 14px sans-serif;
+  text-align: center;
+  transition: opacity 0.4s;
+  margin: 0;
+}
