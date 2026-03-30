@@ -12,14 +12,14 @@ body.loaded {
 }
 
 /* --- DESKTOP SETTINGS --- */
+/* These will apply to everything larger than 600px */
 .w, .f {
   display: flex;
   flex-direction: column;
-  /* Updated to your Desktop Portrait Specs */
-  width: 350px !important; 
-  height: 550px !important; 
+  width: 350px !important;   /* Fixed Width */
+  height: 550px !important;  /* Fixed Height */
   position: relative;
-  margin: 0 auto; /* Centers the portrait slider on the page */
+  margin: 20px auto;         /* Centers the slider on the page */
 }
 
 .f {
@@ -29,11 +29,11 @@ body.loaded {
 }
 
 /* --- MOBILE SETTINGS --- */
+/* These only trigger on screens 600px wide or smaller */
 @media screen and (max-width: 600px) {
   .w, .f {
-    /* Updated to your Mobile Portrait Specs */
-    width: 250px !important; 
-    height: 350px !important; 
+    width: 250px !important;  /* Mobile Width */
+    height: 350px !important; /* Mobile Height */
   }
 }
 
@@ -54,7 +54,7 @@ body.loaded {
 .s img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image fills the portrait box without stretching */
+  object-fit: cover; /* Keeps portrait images from stretching */
   display: block;
 }
 
