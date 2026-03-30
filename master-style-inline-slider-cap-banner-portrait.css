@@ -12,28 +12,31 @@ body.loaded {
 }
 
 /* --- DESKTOP SETTINGS --- */
-/* These will apply to everything larger than 600px */
-.w, .f {
+.w {
   display: flex;
   flex-direction: column;
-  width: 350px !important;   /* Fixed Width */
-  height: 550px !important;  /* Fixed Height */
+  width: 350px !important;   
+  height: 550px !important;  /* The Master Height */
   position: relative;
-  margin: 20px auto;         /* Centers the slider on the page */
+  margin: 20px auto;
+  overflow: hidden;          /* Added to prevent bleed */
 }
 
 .f {
-  flex-grow: 1;
+  flex: 1;                   /* Tells it to take up all available space in .w */
   position: relative;
   overflow: hidden;
+  height: 100% !important;   /* Inherit from .w */
 }
 
 /* --- MOBILE SETTINGS --- */
-/* These only trigger on screens 600px wide or smaller */
 @media screen and (max-width: 600px) {
-  .w, .f {
-    width: 250px !important;  /* Mobile Width */
-    height: 350px !important; /* Mobile Height */
+  .w {
+    width: 250px !important;  
+    height: 350px !important; /* Mobile Master Height */
+  }
+  .f {
+    height: 100% !important;
   }
 }
 
