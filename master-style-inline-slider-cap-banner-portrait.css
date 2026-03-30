@@ -11,33 +11,33 @@ body.loaded {
   background: #fff !important;
 }
 
-/* --- DESKTOP SETTINGS --- */
-.w {
-  display: flex;
-  flex-direction: column;
-  width: 350px !important;   
-  height: 550px !important;  /* The Master Height */
-  position: relative;
-  margin: 20px auto;
-  overflow: hidden;          /* Added to prevent bleed */
+/* --- DESKTOP SETTINGS (Screens WIDER than 600px) --- */
+@media screen and (min-width: 601px) {
+  .w, .f {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 350px !important;   /* Desktop Width */
+    height: 550px !important;  /* Desktop Height - Forced */
+    position: relative !important;
+    margin: 20px auto !important;
+  }
+}
+
+/* --- MOBILE SETTINGS (Screens 600px and SMALLER) --- */
+@media screen and (max-width: 600px) {
+  .w, .f {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 250px !important;   /* Mobile Width */
+    height: 350px !important;  /* Mobile Height */
+    position: relative !important;
+    margin: 10px auto !important;
+  }
 }
 
 .f {
-  flex: 1;                   /* Tells it to take up all available space in .w */
   position: relative;
   overflow: hidden;
-  height: 100% !important;   /* Inherit from .w */
-}
-
-/* --- MOBILE SETTINGS --- */
-@media screen and (max-width: 600px) {
-  .w {
-    width: 250px !important;  
-    height: 350px !important; /* Mobile Master Height */
-  }
-  .f {
-    height: 100% !important;
-  }
 }
 
 .s {
@@ -55,9 +55,9 @@ body.loaded {
 }
 
 .s img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Keeps portrait images from stretching */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
   display: block;
 }
 
