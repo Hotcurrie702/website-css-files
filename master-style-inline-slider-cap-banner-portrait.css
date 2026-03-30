@@ -11,33 +11,26 @@ body.loaded {
   background: #fff !important;
 }
 
-/* --- DESKTOP SETTINGS (Screens WIDER than 600px) --- */
-@media screen and (min-width: 601px) {
-  .w, .f {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 350px !important;   /* Desktop Width */
-    height: 550px !important;  /* Desktop Height - Forced */
-    position: relative !important;
-    margin: 20px auto !important;
-  }
-}
-
-/* --- MOBILE SETTINGS (Screens 600px and SMALLER) --- */
-@media screen and (max-width: 600px) {
-  .w, .f {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 250px !important;   /* Mobile Width */
-    height: 350px !important;  /* Mobile Height */
-    position: relative !important;
-    margin: 10px auto !important;
-  }
+/* --- DESKTOP SETTINGS (Default) --- */
+.w, .f {
+  display: flex;
+  flex-direction: column;
+  height: 550px !important; /* Updated to match your desktop height */
+  position: relative;
+  width: 100%;
 }
 
 .f {
+  flex-grow: 1;
   position: relative;
   overflow: hidden;
+}
+
+/* --- MOBILE SETTINGS --- */
+@media screen and (max-width: 600px) {
+  .w, .f {
+    height: 250px !important; /* Updated to match your mobile height */
+  }
 }
 
 .s {
@@ -55,9 +48,9 @@ body.loaded {
 }
 
 .s img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
