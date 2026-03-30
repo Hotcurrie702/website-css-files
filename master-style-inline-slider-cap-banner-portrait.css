@@ -1,0 +1,102 @@
+body {
+  background: #e2e8f0 !important;
+  margin: 0;
+  height: auto;
+  overflow: hidden;
+  font-family: sans-serif;
+  transition: background 0.8s ease;
+}
+
+body.loaded {
+  background: #fff !important;
+}
+
+/* --- DESKTOP SETTINGS --- */
+.w, .f {
+  display: flex;
+  flex-direction: column;
+  /* Updated to your Desktop Portrait Specs */
+  width: 350px !important; 
+  height: 550px !important; 
+  position: relative;
+  margin: 0 auto; /* Centers the portrait slider on the page */
+}
+
+.f {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- MOBILE SETTINGS --- */
+@media screen and (max-width: 600px) {
+  .w, .f {
+    /* Updated to your Mobile Portrait Specs */
+    width: 250px !important; 
+    height: 350px !important; 
+  }
+}
+
+.s {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.s.a.r {
+  opacity: 1;
+  z-index: 1;
+}
+
+.s img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image fills the portrait box without stretching */
+  display: block;
+}
+
+.overlay-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 20px;
+  background: rgba(22, 19, 44, 0.4);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  backdrop-filter: blur(3px);
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.nav a {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav a.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+.cap {
+  color: #fff;
+  font: italic 14px sans-serif;
+  text-align: center;
+  transition: opacity 0.4s;
+  margin: 0;
+}
