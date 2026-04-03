@@ -1,7 +1,76 @@
-.hotel-glance-container{padding:20px;background-color:#f8fbff;border-radius:12px;border:1px solid #e1e8f0;border-left:6px solid #0055a4;font-family:inherit;margin:20px 0;overflow:hidden}
-.glance-heading{margin:0 0 15px 0;font-size:1.6rem;color:#222;border-bottom:1px solid #e1e8f0;padding-bottom:8px;font-weight:700}
-.glance-row{display:flex;align-items:center;margin-bottom:12px}
-.glance-row:last-child{margin-bottom:0}
-.glance-icon{font-size:1.25rem;margin-right:12px;min-width:28px;text-align:center;flex-shrink:0;display: flex;align-items: center;justify-content: center;line-height: 1}
-.highlight{color:#0055a4;font-weight:700}
-.glance-text{font-size:18px;color:#333;line-height:1.5;-webkit-font-smoothing:antialiased}
+/* --- Your Original Desktop Styles --- */
+.hotel-glance-container {
+  padding: 20px;
+  background-color: #f8fbff;
+  border-radius: 12px;
+  border: 1px solid #e1e8f0;
+  border-left: 6px solid #0055a4;
+  font-family: inherit;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.glance-heading {
+  margin: 0 0 15px 0;
+  font-size: 1.6rem;
+  color: #222;
+  border-bottom: 1px solid #e1e8f0;
+  padding-bottom: 8px;
+  font-weight: 700;
+}
+
+.glance-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.glance-row:last-child {
+  margin-bottom: 0;
+}
+
+.glance-icon {
+  font-size: 1.25rem;
+  margin-right: 12px;
+  min-width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.highlight {
+  color: #0055a4;
+  font-weight: 700;
+}
+
+.glance-text {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Mobile Responsiveness (Screen widths 768px and below) --- */
+@media (max-width: 768px) {
+  .glance-heading {
+    font-size: 1.3rem; /* Reduced from 1.6rem */
+    margin-bottom: 10px;
+  }
+
+  .glance-text {
+    font-size: 15px; /* Reduced from 18px */
+    line-height: 1.4;
+  }
+
+  .glance-icon {
+    font-size: 1.1rem; /* Slightly smaller icons to match text */
+    margin-right: 10px;
+  }
+
+  .hotel-glance-container {
+    padding: 15px; /* Tighter padding for small screens */
+  }
+}
