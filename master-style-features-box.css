@@ -1,85 +1,12 @@
-/* --- Your Original Desktop Styles --- */
-.hotel-glance-container {
-  padding: 20px;
-  background-color: #f8fbff;
-  border-radius: 12px;
-  border: 1px solid #e1e8f0;
-  border-left: 6px solid #0055a4;
-  font-family: inherit;
-  margin: 0;
-  overflow: hidden;
-}
-
-.glance-heading {
-  margin: 0 0 15px 0;
-  font-size: 1.6rem !important;
-  color: #222;
-  border-bottom: 1px solid #e1e8f0;
-  padding-bottom: 8px;
-  font-weight: 700;
-}
-
-.glance-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.glance-row:last-child {
-  margin-bottom: 0;
-}
-
-.glance-icon {
-  font-size: 1.25rem;
-  margin-right: 12px;
-  min-width: 28px;
-  text-align: center;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.highlight {
-  color: #0055a4;
-  font-weight: 700;
-}
-
-.glance-text {
-  font-size: 18px !important;
-  color: #333;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* --- Mobile Responsive Overrides --- */
-@media screen and (max-width: 480px) {
-  .hotel-glance-container {
-    padding: 15px !important;
-    margin: 15px 0;
-    border-left-width: 4px; /* Slightly thinner border for mobile scale */
-  }
-
-  .glance-heading {
-    font-size: 1.25rem !important; /* Smaller heading for mobile */
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-  }
-
-  .glance-text {
-    font-size: 15px !important; /* Reduced from 18px */
-    line-height: 1.4;
-  }
-
-  .glance-icon {
-    font-size: 1.1rem !important; 
-    min-width: 24px;
-    margin-right: 10px;
-  }
-
-  .glance-row {
-    margin-bottom: 10px;
-    align-items: flex-start; /* Better alignment for multi-line text on mobile */
-  }
-}
+.hotel-glance-container{padding:20px;background-color:#f8fbff;border-radius:12px;border:1px solid #e1e8f0;border-left:6px solid #0055a4;font-family:inherit;margin:0;overflow:hidden}
+.glance-heading{margin:0 0 15px 0;font-size:1.6rem!important;color:#222;border-bottom:1px solid #e1e8f0;padding-bottom:8px;font-weight:700}
+.glance-row{display:flex;align-items:center;margin-bottom:12px}
+.glance-row:last-child{margin-bottom:0}
+.glance-icon{font-size:1.25rem;margin-right:12px;min-width:28px;text-align:center;flex-shrink:0;display:flex;align-items:center;justify-content:center;line-height:1}
+.highlight{color:#0055a4;font-weight:700}
+.glance-text{font-size:18px!important;color:#333;line-height:1.5;-webkit-font-smoothing:antialiased}
+@media screen and (max-width:480px){.hotel-glance-container{padding:15px!important;margin:15px 0;border-left-width:4px}}
+@media screen and (max-width:480px){.glance-heading{font-size:1.25rem!important;margin-bottom:12px;padding-bottom:6px}}
+@media screen and (max-width:480px){.glance-text{font-size:15px!important;line-height:1.4}}
+@media screen and (max-width:480px){.glance-icon{font-size:1.1rem!important;min-width:24px;margin-right:10px}}
+@media screen and (max-width:480px){.glance-row{margin-bottom:10px;align-items:flex-start}}
