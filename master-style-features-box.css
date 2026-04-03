@@ -53,24 +53,33 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Mobile Responsiveness (Screen widths 768px and below) --- */
-@media (max-width: 768px) {
+/* --- Mobile Responsive Overrides --- */
+@media screen and (max-width: 768px) {
+  .hotel-glance-container {
+    padding: 16px;
+    margin: 15px 0;
+    border-left-width: 4px; /* Slightly thinner border for mobile scale */
+  }
+
   .glance-heading {
-    font-size: 1.3rem; /* Reduced from 1.6rem */
-    margin-bottom: 10px;
+    font-size: 1.25rem !important; /* Smaller heading for mobile */
+    margin-bottom: 12px;
+    padding-bottom: 6px;
   }
 
   .glance-text {
-    font-size: 15px; /* Reduced from 18px */
+    font-size: 15px !important; /* Reduced from 18px */
     line-height: 1.4;
   }
 
   .glance-icon {
-    font-size: 1.1rem; /* Slightly smaller icons to match text */
+    font-size: 1.1rem !important; 
+    min-width: 24px;
     margin-right: 10px;
   }
 
-  .hotel-glance-container {
-    padding: 15px; /* Tighter padding for small screens */
+  .glance-row {
+    margin-bottom: 10px;
+    align-items: flex-start; /* Better alignment for multi-line text on mobile */
   }
 }
