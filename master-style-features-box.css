@@ -12,7 +12,7 @@
 
 .glance-heading {
   margin: 0 0 15px 0;
-  font-size: 1.6rem;
+  font-size: 1.6rem !important;
   color: #222;
   border-bottom: 1px solid #e1e8f0;
   padding-bottom: 8px;
@@ -47,16 +47,16 @@
 }
 
 .glance-text {
-  font-size: 18px;
+  font-size: 18px !important;
   color: #333;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 /* --- Mobile Responsive Overrides --- */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
   .hotel-glance-container {
-    padding: 16px;
+    padding: 15px !important;
     margin: 15px 0;
     border-left-width: 4px; /* Slightly thinner border for mobile scale */
   }
