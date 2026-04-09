@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Attraction Map</title>
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+
+  <style>
+    /* CRITICAL UI - Ensures no "white flash" and proper layout before JS loads */
+    html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #f0f0f0; font-family: sans-serif; }
+    #custom-map-wrap, #map { width: 100%; height: 100vh; position: relative; }
+    
+    #loader-container {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: white; display: flex; flex-direction: column; 
+      justify-content: center; align-items: center; z-index: 99999;
+      transition: opacity 0.5s ease;
+    }
+    .spinner {
+      width: 50px; height: 50px; border: 5px solid #f3f3f3;
+      border-top: 5px solid #01257D; border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-label { margin-top: 15px; font-weight: bold; color: #444; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+  <div id="custom-map-wrap">
+    
+    <div id="loader-container">
+      <div class="spinner"></div>
+      <div id="progress-text" style="margin-top:10px;">0%</div>
+      <div id="loader-status" class="loading-label">INITIALIZING...</div>
+    </div>
+
+    <div id="map-modal">
+      <span class="modal-close" onclick="closeModal()">
+        <i class="material-icons">close</i>
+      </span>
+      <div id="modal-content"></div>
+    </div>
+    
+    <div id="map"></div>
+
+  </div>
+
+  <script>
+    let map, clusterer;
+    let AdvancedMarkerElement, PinElement; 
+
+    /**
+     * 1. INITIALIZE MAP
+     */
+    async function initMap() {
+      try {
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement: AM, PinElement: PE } = await google.maps.importLibrary("marker");
+        
+        AdvancedMarkerElement = AM;
+        PinElement = PE;
+
+        const isMobile = window.innerWidth < 768;
+        map = new Map(document.getElementById("map"), {
+          zoom: isMobile ? 1 : 2,
+          center: { lat: 20, lng: 0 },
+          mapId: "c262e61d52467798bead7c88",
+          disableDefaultUI: isMobile
+        });
+        
+        // Add this inside initMap, after the map is created
+			map.addListener("click", () => {
+  			closeModal();
+		});
+
+        clusterer = new markerClusterer.MarkerClusterer({ map });
+
+        // Signal Wix that Iframe is ready to receive data
+        window.parent.postMessage("MAP_READY", "*");
+
+        setupMessageListener();
+      } catch (err) {
+        console.error("Map Initialization Error:", err);
+        document.getElementById('loader-status').innerText = "ERROR LOADING MAP";
+      }
+    }
+
+    /**
+     * 2. LISTEN FOR WIX DATA
+     */
+    function setupMessageListener() {
+      window.addEventListener("message", async (event) => {
+        const { css, locations } = event.data;
+
+        // Inject Dynamic CSS from mapStyles.js
+        if (css) {
+          const styleTag = document.createElement('style');
+          styleTag.innerHTML = css;
+          document.head.appendChild(styleTag);
+        }
+
+        if (Array.isArray(locations)) {
+          await renderMarkers(locations);
+          document.getElementById('loader-container').classList.add('hidden');
+        }
+      });
+    }
+
+    /**
+     * 3. RENDER MARKERS WITH PROGRESS
+     */
+    async function renderMarkers(locations) {
+      document.getElementById('loader-status').innerText = "RENDERING DESTINATIONS...";
+      const markers = [];
+      const total = locations.length;
+      
+      for (let i = 0; i < total; i++) {
+        const loc = locations[i];
+        if (loc.lat && loc.lng) {
+          markers.push(createMarker(loc));
+        }
+
+        // Update progress every 20 markers
+        if (i % 20 === 0 || i === total - 1) {
+          const percent = Math.round(((i + 1) / total) * 100);
+          document.getElementById('progress-text').innerText = percent + "%";
+          await new Promise(r => requestAnimationFrame(r));
+        }
+      }
+      clusterer.addMarkers(markers);
+    }
+
+    /**
+     * 4. CREATE INDIVIDUAL MARKERS
+     */
+    function createMarker(loc) {
+      // 1. Create the icon element
+      const iconCustom = document.createElement("div");
+      iconCustom.innerHTML = '<i class="material-icons" 	style="color:white;font-size:18px;">flight</i>';
+
+  // 2. Define the Pin look (Blue background, White icon)
+  const pin = new PinElement({
+    background: "#01257D",
+    borderColor: "#FFFFFF",
+    glyph: iconCustom,
+  });
+
+  // 3. Create the Marker using the Pin
+  const marker = new AdvancedMarkerElement({
+    position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
+    map: map,
+    title: loc.title,
+    content: pin.element // This replaces the standard red pin
+  });
+
+  marker.addListener("gmp-click", () => {
+    const modal = document.getElementById('map-modal');
+    const content = document.getElementById('modal-content');
+	const rawSubtitle = loc.subtitle || '';
+	const truncatedSubtitle = rawSubtitle.length > 100 
+	   ? rawSubtitle.substring(0, 320) + '...' 
+	   : rawSubtitle;
+    
+    content.innerHTML = `
+      <div class="info-card">
+        <img src="${loc.attimage || ''}" alt="${loc.title}">
+        <div class="info-header">
+          <h3>${loc.title}</h3>
+          <h4>${loc.location || ''}</h4>
+        </div>
+        <div class="info-body">
+			<p>${truncatedSubtitle}</p>
+          <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'block';
+    map.panTo(marker.position);
+  });
+
+  return marker;
+}
+
+    /**
+     * 5. UI UTILITIES
+     */
+    function closeModal() {
+      document.getElementById('map-modal').style.display = 'none';
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7_YCyV9Sc_SXLbbAn307aDyr3IFsVVmQ&callback=initMap&v=weekly&libraries=marker" async defer></script>
+</body>
+</html>
