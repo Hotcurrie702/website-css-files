@@ -78,18 +78,19 @@ function createMarker(loc) {
   const iconCustom = document.createElement("div");
   iconCustom.innerHTML = '<i class="material-icons" style="color:white;font-size:18px;">flight</i>';
 
-  const pin = new PinElement({
+  const pin = new google.maps.marker.PinElement({ // Use full path
     background: "#01257D",
     borderColor: "#FFFFFF",
-    glyph: iconCustom,
+    glyph: iconCustom, // The API warning is fine for now, but ensure this is correct
   });
 
-  const marker = new AdvancedMarkerElement({
+  const marker = new google.maps.marker.AdvancedMarkerElement({
     position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
     map: map,
     title: loc.title,
     content: pin.element 
   });
+}
 
   marker.addListener("gmp-click", () => {
     const modal = document.getElementById('map-modal');
