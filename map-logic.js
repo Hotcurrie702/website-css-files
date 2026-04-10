@@ -2,6 +2,8 @@
  * map-logic.js
  * Host this on GitHub
  */
+window.initMap = initMap;
+
 let map, clusterer;
 let AdvancedMarkerElement, PinElement; 
 
