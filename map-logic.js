@@ -36,12 +36,12 @@ async function initMap() {
 
 function setupMessageListener() {
   window.addEventListener("message", (event) => {
-    console.log("Message received from Wix:", event.data); // Debug line
+    // IF YOU DON'T SEE THIS LOG IN YOUR CONSOLE, THE FILE ISN'T UPDATED
+    console.log("Message received from Wix:", event.data); 
 
     const { css, locations } = event.data;
 
     if (css) {
-      console.log("Injecting CSS...");
       const styleTag = document.getElementById('dynamic-wix-style') || document.createElement('style');
       styleTag.id = 'dynamic-wix-style';
       styleTag.innerHTML = css;
@@ -49,7 +49,6 @@ function setupMessageListener() {
     }
 
     if (Array.isArray(locations)) {
-      console.log("Locations received:", locations.length);
       renderMarkers(locations);
     }
   });
