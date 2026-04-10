@@ -36,18 +36,29 @@ async function initMap() {
 
 function setupMessageListener() {
   window.addEventListener("message", async (event) => {
-    const { css, locations } = event.data;
-    if (css) {
+    // Check if we received the data object from Wix
+    if (event.data && event.data.css) {
+      console.log("CSS received from Wix, injecting...");
+      
+      // Create a style element
       const styleTag = document.createElement('style');
-      styleTag.innerHTML = css;
+      styleTag.type = 'text/css';
+      styleTag.innerHTML = event.data.css;
+      
+      // Append it to the head
       document.head.appendChild(styleTag);
     }
-    if (Array.isArray(locations)) {
-      await renderMarkers(locations);
-      document.getElementById('loader-container').classList.add('hidden');
+
+    if (event.data && Array.isArray(event.data.locations)) {
+      console.log("Locations received from Wix, rendering...");
+      await renderMarkers(event.data.locations);
+      
+      // Hide the loader once markers are rendered
+      const loader = document.getElementById('loader-container');
+      if (loader) loader.classList.add('hidden');
     }
   });
-}
+}}
 
 async function renderMarkers(locations) {
   document.getElementById('loader-status').innerText = "RENDERING...";
