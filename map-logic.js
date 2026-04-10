@@ -35,30 +35,25 @@ async function initMap() {
 }
 
 function setupMessageListener() {
-  window.addEventListener("message", async (event) => {
-    // Check if we received the data object from Wix
-    if (event.data && event.data.css) {
-      console.log("CSS received from Wix, injecting...");
-      
-      // Create a style element
-      const styleTag = document.createElement('style');
-      styleTag.type = 'text/css';
-      styleTag.innerHTML = event.data.css;
-      
-      // Append it to the head
+  window.addEventListener("message", (event) => {
+    console.log("Message received from Wix:", event.data); // Debug line
+
+    const { css, locations } = event.data;
+
+    if (css) {
+      console.log("Injecting CSS...");
+      const styleTag = document.getElementById('dynamic-wix-style') || document.createElement('style');
+      styleTag.id = 'dynamic-wix-style';
+      styleTag.innerHTML = css;
       document.head.appendChild(styleTag);
     }
 
-    if (event.data && Array.isArray(event.data.locations)) {
-      console.log("Locations received from Wix, rendering...");
-      await renderMarkers(event.data.locations);
-      
-      // Hide the loader once markers are rendered
-      const loader = document.getElementById('loader-container');
-      if (loader) loader.classList.add('hidden');
+    if (Array.isArray(locations)) {
+      console.log("Locations received:", locations.length);
+      renderMarkers(locations);
     }
   });
-}}
+}
 
 async function renderMarkers(locations) {
   document.getElementById('loader-status').innerText = "RENDERING...";
