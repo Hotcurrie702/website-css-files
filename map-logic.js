@@ -1,19 +1,15 @@
-/**
- * map-logic.js
- */
 window.initMap = initMap;
 
 let map, clusterer;
-let AdvancedMarkerElement, PinElement; 
 
 async function initMap() {
+  // 1. SET UP LISTENER FIRST thing so we don't miss the Wix message
+  setupMessageListener();
+
   try {
     const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement: AM, PinElement: PE } = await google.maps.importLibrary("marker");
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     
-    AdvancedMarkerElement = AM;
-    PinElement = PE;
-
     const isMobile = window.innerWidth < 768;
     map = new Map(document.getElementById("map"), {
       zoom: isMobile ? 1 : 2,
@@ -25,23 +21,25 @@ async function initMap() {
     map.addListener("click", () => closeModal());
     clusterer = new markerClusterer.MarkerClusterer({ map });
 
-    // Signal Wix and setup listener
+    // 2. SIGNAL WIX AFTER map is ready
+    console.log("GitHub Script: Signaling READY to Wix");
     window.parent.postMessage("MAP_READY", "*");
-    setupMessageListener();
+
   } catch (err) {
     console.error("Map Initialization Error:", err);
-    document.getElementById('loader-status').innerText = "ERROR LOADING MAP";
   }
 }
 
 function setupMessageListener() {
+  console.log("GitHub Script: Listener is active and waiting...");
   window.addEventListener("message", (event) => {
-    console.log("Message received from Wix:", event.data); 
+    // If we get ANY message, log it immediately
+    console.log("GitHub Script: RECEIVED FROM WIX ->", event.data);
 
     const { css, locations } = event.data;
 
     if (css) {
-      console.log("Injecting CSS...");
+      console.log("GitHub Script: Injecting CSS");
       const styleTag = document.getElementById('dynamic-wix-style') || document.createElement('style');
       styleTag.id = 'dynamic-wix-style';
       styleTag.innerHTML = css;
@@ -49,24 +47,19 @@ function setupMessageListener() {
     }
 
     if (Array.isArray(locations)) {
+      console.log("GitHub Script: Starting Marker Render");
       renderMarkers(locations);
     }
   });
 }
 
 async function renderMarkers(locations) {
-  document.getElementById('loader-status').innerText = "RENDERING...";
   const markers = [];
   for (let i = 0; i < locations.length; i++) {
     const loc = locations[i];
     if (loc.lat && loc.lng) markers.push(createMarker(loc));
-    if (i % 20 === 0) {
-      document.getElementById('progress-text').innerText = Math.round((i / locations.length) * 100) + "%";
-      await new Promise(r => requestAnimationFrame(r));
-    }
   }
   clusterer.addMarkers(markers);
-  // Hide loader when done
   const loader = document.getElementById('loader-container');
   if(loader) loader.classList.add('hidden');
 }
@@ -88,23 +81,15 @@ function createMarker(loc) {
     content: pin.element 
   });
 
-  // THE FIX: This listener must be INSIDE the function
   marker.addListener("gmp-click", () => {
     const modal = document.getElementById('map-modal');
     const content = document.getElementById('modal-content');
-    const truncatedSubtitle = (loc.subtitle || '').substring(0, 320);
-    
     content.innerHTML = `
       <div class="info-card">
-        <img src="${loc.attimage || ''}" alt="${loc.title}">
-        <div class="info-header">
-          <h3>${loc.title}</h3>
-          <h4>${loc.location || ''}</h4>
-        </div>
-        <div class="info-body">
-          <p>${truncatedSubtitle}...</p>
-          <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
-        </div>
+        <img src="${loc.attimage || ''}" style="width:100%">
+        <h3>${loc.title}</h3>
+        <p>${(loc.subtitle || '').substring(0, 200)}...</p>
+        <a href="${loc.fullURL}" target="_blank">VIEW DETAILS</a>
       </div>
     `;
     modal.style.display = 'block';
@@ -115,6 +100,5 @@ function createMarker(loc) {
 }
 
 function closeModal() {
-  const modal = document.getElementById('map-modal');
-  if(modal) modal.style.display = 'none';
+  document.getElementById('map-modal').style.display = 'none';
 }
