@@ -1,6 +1,5 @@
 /**
  * map-logic.js
- * Host this on GitHub
  */
 window.initMap = initMap;
 
@@ -19,13 +18,14 @@ async function initMap() {
     map = new Map(document.getElementById("map"), {
       zoom: isMobile ? 1 : 2,
       center: { lat: 20, lng: 0 },
-      mapId: "c262e61d52467798bead7c88", // Ensure this Map ID is active in Google Console
+      mapId: "c262e61d52467798bead7c88",
       disableDefaultUI: isMobile
     });
     
     map.addListener("click", () => closeModal());
     clusterer = new markerClusterer.MarkerClusterer({ map });
 
+    // Signal Wix and setup listener
     window.parent.postMessage("MAP_READY", "*");
     setupMessageListener();
   } catch (err) {
@@ -36,12 +36,12 @@ async function initMap() {
 
 function setupMessageListener() {
   window.addEventListener("message", (event) => {
-    // IF YOU DON'T SEE THIS LOG IN YOUR CONSOLE, THE FILE ISN'T UPDATED
     console.log("Message received from Wix:", event.data); 
 
     const { css, locations } = event.data;
 
     if (css) {
+      console.log("Injecting CSS...");
       const styleTag = document.getElementById('dynamic-wix-style') || document.createElement('style');
       styleTag.id = 'dynamic-wix-style';
       styleTag.innerHTML = css;
@@ -66,16 +66,19 @@ async function renderMarkers(locations) {
     }
   }
   clusterer.addMarkers(markers);
+  // Hide loader when done
+  const loader = document.getElementById('loader-container');
+  if(loader) loader.classList.add('hidden');
 }
 
 function createMarker(loc) {
   const iconCustom = document.createElement("div");
   iconCustom.innerHTML = '<i class="material-icons" style="color:white;font-size:18px;">flight</i>';
 
-  const pin = new google.maps.marker.PinElement({ // Use full path
+  const pin = new google.maps.marker.PinElement({
     background: "#01257D",
     borderColor: "#FFFFFF",
-    glyph: iconCustom, // The API warning is fine for now, but ensure this is correct
+    glyph: iconCustom,
   });
 
   const marker = new google.maps.marker.AdvancedMarkerElement({
@@ -84,8 +87,8 @@ function createMarker(loc) {
     title: loc.title,
     content: pin.element 
   });
-}
 
+  // THE FIX: This listener must be INSIDE the function
   marker.addListener("gmp-click", () => {
     const modal = document.getElementById('map-modal');
     const content = document.getElementById('modal-content');
@@ -107,12 +110,11 @@ function createMarker(loc) {
     modal.style.display = 'block';
     map.panTo(marker.position);
   });
+
   return marker;
 }
 
 function closeModal() {
-  document.getElementById('map-modal').style.display = 'none';
+  const modal = document.getElementById('map-modal');
+  if(modal) modal.style.display = 'none';
 }
-
-// Attach initMap to the window so the Google script can find the callback
-window.initMap = initMap;
