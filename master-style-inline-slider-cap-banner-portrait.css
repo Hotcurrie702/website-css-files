@@ -29,7 +29,7 @@ body.loaded {
 /* --- MOBILE SETTINGS --- */
 @media screen and (max-width: 400px) {
   .w, .f {
-    height: 250px /*!important;  Updated to match your mobile height */
+    height: 250px; /*!important;  Updated to match your mobile height */
   }
 }
 
