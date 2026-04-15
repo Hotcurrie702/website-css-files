@@ -110,7 +110,10 @@ function createMarker(loc) {
     marker.addListener("gmp-click", () => {
         const modal = document.getElementById('map-modal');
         const content = document.getElementById('modal-content');
-        const truncatedSubtitle = (loc.subtitle || '').substring(0, 400);
+        let subtitle = loc.subtitle || '';
+        const truncatedSubtitle = subtitle.length > 400 
+          ? subtitle.substring(0, 400) + '...' 
+          : subtitle;
         
         // ONLY update the content div, leaving the close button untouched
         content.innerHTML = `
