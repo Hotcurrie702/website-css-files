@@ -2,6 +2,7 @@
  * Master Map Logic for shanecurrie.id.au
  * Handles dynamic icons, zoom, and centering from Wix Page Code
  */
+console.log("🚀 MAP SCRIPT LOADED - VERSION: " + new Date().getTime());
 
 let map, clusterer;
 let AdvancedMarkerElement, PinElement;
@@ -108,6 +109,8 @@ function createMarker(loc) {
     });
 
         marker.addListener("gmp-click", () => {
+            console.warn("📍 Marker clicked: " + loc.title); // <--- ADD THIS
+            
             const modal = document.getElementById('map-modal');
             const content = document.getElementById('modal-content');
             
