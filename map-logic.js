@@ -134,7 +134,7 @@ function createMarker(loc) {
               <h4>${loc.location || ''}</h4>
             </div>
             <div class="info-body">
-              <p>${truncatedSubtitle}...</p>
+              <p>${truncatedSubtitle}</p>
               <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
             </div>
           </div>
