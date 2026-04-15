@@ -20,8 +20,8 @@ async function initMap() {
 
         // Initial Map Render (using defaults until Wix sends config)
         map = new Map(document.getElementById("map"), {
-            zoom: isMobile ? 1 : 3,
-            center: { lat: 14, lng: 95 },
+            zoom: isMobile ? 1 : 5,
+            center: { lat: 30, lng: 150 },
             mapId: "c262e61d52467798bead7c88",
             disableDefaultUI: isMobile
         });
