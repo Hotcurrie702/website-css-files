@@ -122,7 +122,7 @@ function createMarker(loc) {
             
             // 3. Apply the smart truncation
             const truncatedSubtitle = subtitle.length > 380 
-              ? subtitle.substring(0, 400) + '...' 
+              ? subtitle.substring(0, 380) + '...' 
               : subtitle;
         
         // ONLY update the content div, leaving the close button untouched
