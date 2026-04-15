@@ -112,7 +112,11 @@ function createMarker(loc) {
         const content = document.getElementById('modal-content');
         const truncatedSubtitle = (loc.subtitle || '').substring(0, 400);
         
+        // We add the Close Button back in here so it exists inside the modal
         content.innerHTML = `
+            <span class="modal-close" onclick="closeModal()">
+                <i class="material-icons">close</i>
+            </span>
             <div class="info-card">
                 <img src="${loc.attimage || ''}" alt="${loc.title}">
                 <div class="info-header">
@@ -125,7 +129,7 @@ function createMarker(loc) {
                 </div>
             </div>
         `;
-
+    
         modal.style.display = 'block';
         map.panTo(marker.position);
     });
