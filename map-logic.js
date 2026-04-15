@@ -107,13 +107,20 @@ function createMarker(loc) {
         content: pin.element
     });
 
-    marker.addListener("gmp-click", () => {
-        const modal = document.getElementById('map-modal');
-        const content = document.getElementById('modal-content');
-        let subtitle = loc.subtitle || '';
-        const truncatedSubtitle = subtitle.length > 400 
-          ? subtitle.substring(0, 400) + '...' 
-          : subtitle;
+        marker.addListener("gmp-click", () => {
+            const modal = document.getElementById('map-modal');
+            const content = document.getElementById('modal-content');
+            
+            // 1. Get the original text
+            let subtitle = loc.subtitle || '';
+            
+            // 2. Log the data to the console
+            console.log(`[Map Debug] Subtitle: "${subtitle}" | Count: ${subtitle.length}`);
+            
+            // 3. Apply the smart truncation
+            const truncatedSubtitle = subtitle.length > 400 
+              ? subtitle.substring(0, 400) + '...' 
+              : subtitle;
         
         // ONLY update the content div, leaving the close button untouched
         content.innerHTML = `
