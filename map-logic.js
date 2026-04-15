@@ -112,22 +112,19 @@ function createMarker(loc) {
         const content = document.getElementById('modal-content');
         const truncatedSubtitle = (loc.subtitle || '').substring(0, 400);
         
-        // We add the Close Button back in here so it exists inside the modal
+        // ONLY update the content div, leaving the close button untouched
         content.innerHTML = `
-            <span class="modal-close" onclick="closeModal()">
-                <i class="material-icons">close</i>
-            </span>
-            <div class="info-card">
-                <img src="${loc.attimage || ''}" alt="${loc.title}">
-                <div class="info-header">
-                    <h3>${loc.title}</h3>
-                    <h4>${loc.location || ''}</h4>
-                </div>
-                <div class="info-body">
-                    <p>${truncatedSubtitle}...</p>
-                    <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
-                </div>
+          <div class="info-card">
+            <img src="${loc.attimage || ''}" alt="${loc.title}">
+            <div class="info-header">
+              <h3>${loc.title}</h3>
+              <h4>${loc.location || ''}</h4>
             </div>
+            <div class="info-body">
+              <p>${truncatedSubtitle}...</p>
+              <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
+            </div>
+          </div>
         `;
     
         modal.style.display = 'block';
