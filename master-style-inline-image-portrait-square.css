@@ -1,0 +1,65 @@
+/* Standard Reset */
+html, body { 
+    margin: 0 !important; 
+    padding: 0 !important;
+    width: 100%;
+    background: transparent; /* Changed to transparent for Wix integration */
+    font-family: sans-serif;
+    overflow: hidden; /* Prevents double scrollbars in Wix boxes */
+}
+
+/* --- DESKTOP SETTINGS (Base State) --- */
+/* We define these first so they are the default */
+.c1, .f1 { 
+    width: 350px !important;
+    height: 350px !important; 
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- MOBILE SETTINGS --- */
+/* Target mobile devices specifically by screen width */
+@media screen and (max-width: 300px) {
+    .c1, .f1 { 
+        width: 250px !important;
+        height: 250px !important; 
+    }
+}
+
+/* --- LOGIC --- */
+.c1 { 
+    display: flex; 
+    flex-direction: column; 
+    transition: background .8s; 
+}
+
+/* --- Updated Logic Section --- */
+.f1 img { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    /* Default is center; no !important here so inline can override it */
+    object-position: center; 
+    display: block; 
+    opacity: 0; 
+    transition: opacity .8s; 
+}
+
+.f1 img.v { opacity: 1; }
+
+.cap { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    padding: 10px; 
+    text-align: center; 
+    font-size: 13px;
+    color: #fff; 
+    z-index: 10; 
+    background: rgba(22, 19, 44, 0.4);
+}
