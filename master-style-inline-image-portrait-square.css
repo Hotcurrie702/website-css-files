@@ -3,6 +3,7 @@ html, body {
     margin: 0 !important; 
     padding: 0 !important;
     width: 100%;
+    background: #D9E4F2;
     background: transparent; /* Changed to transparent for Wix integration */
     font-family: sans-serif;
     overflow: hidden; /* Prevents double scrollbars in Wix boxes */
