@@ -58,8 +58,8 @@ html, body {
 }
 
 /* --- MOBILE SETTINGS --- */
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 600px) {
     .banner-strip { 
-        height: 100px !important; 
+        height: 250px !important; 
     }
 }
