@@ -1,0 +1,65 @@
+/* banner-style.css */
+
+/* Standard Reset & Background */
+html, body { 
+    margin: 0 !important; 
+    padding: 0 !important;
+    width: 100%;
+    background: #D9E4F2 !important;
+    font-family: sans-serif;
+}
+
+/* Container logic */
+.banner-strip { 
+    display: flex; 
+    flex-direction: column; 
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 550px !important; 
+}
+
+.banner-strip-row {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-strip-item {
+    flex: 1 1 0;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.banner-strip-item img { 
+    width: 100%; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    object-position: center; 
+    display: block;
+    transition: opacity .8s; 
+}
+
+/* Caption styling */
+.banner-caption { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    padding: 10px; 
+    text-align: center; 
+    font-size: 13px;
+    color: #fff; 
+    z-index: 10; 
+    background: rgba(22, 19, 44, 0.4) !important;
+    pointer-events: none;
+}
+
+/* --- MOBILE SETTINGS --- */
+@media screen and (max-width: 600px) {
+    .banner-strip { 
+        height: 250px !important; 
+    }
+}
