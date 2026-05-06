@@ -60,6 +60,6 @@ html, body {
 /* --- MOBILE SETTINGS --- */
 @media screen and (max-width: 600px) {
     .banner-strip { 
-        height: 250px !important; 
+        height: 200px !important; 
     }
 }
