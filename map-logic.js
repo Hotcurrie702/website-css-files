@@ -121,8 +121,8 @@ function createMarker(loc) {
             console.log(`[Map Debug] Subtitles: "${subtitle}" | Count: ${subtitle.length}`);
             
             // 3. Apply the smart truncation
-            const truncatedSubtitle = subtitle.length > 350 
-              ? subtitle.substring(0, 350) + '...' 
+            const truncatedSubtitle = subtitle.length > 330 
+              ? subtitle.substring(0, 330) + '...' 
               : subtitle;
             console.log(`[Map] Truncated Subtitle: "${truncatedSubtitle}" | Count: ${truncatedSubtitle.length}`);
         
