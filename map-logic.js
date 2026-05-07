@@ -121,8 +121,8 @@ function createMarker(loc) {
             console.log(`[Map Debug] Subtitle: "${subtitle}" | Count: ${subtitle.length}`);
             
             // 3. Apply the smart truncation
-            const truncatedSubtitle = subtitle.length > 380 
-              ? subtitle.substring(0, 380) + '...' 
+            const truncatedSubtitle = subtitle.length > 350 
+              ? subtitle.substring(0, 350) + '...' 
               : subtitle;
         
         // ONLY update the content div, leaving the close button untouched
