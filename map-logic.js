@@ -118,13 +118,13 @@ function createMarker(loc) {
             let subtitle = loc.subtitle || '';
             
             // 2. Log the data to the console
-            console.log(`[Map Debug] Subtitle: "${subtitle}" | Count: ${subtitle.length}`);
+            console.log(`[Map Debug] Subtitles: "${subtitle}" | Count: ${subtitle.length}`);
             
             // 3. Apply the smart truncation
             const truncatedSubtitle = subtitle.length > 350 
               ? subtitle.substring(0, 350) + '...' 
               : subtitle;
-            console.log(`[Map Debug] Truncated Subtitle: "${truncatedSubtitle}" | Count: ${truncatedSubtitle.length}`);
+            console.log(`[Map] Truncated Subtitle: "${truncatedSubtitle}" | Count: ${truncatedSubtitle.length}`);
         
         // ONLY update the content div, leaving the close button untouched
         content.innerHTML = `
