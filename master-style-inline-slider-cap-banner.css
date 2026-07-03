@@ -33,6 +33,16 @@ body.loaded {
   }
 }
 
+.cap a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.cap a:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
 .s {
   position: absolute;
   top: 0;
