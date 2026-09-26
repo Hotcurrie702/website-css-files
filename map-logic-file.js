@@ -91,72 +91,69 @@ async function renderMarkers(locations) {
 }
 
 function createMarker(loc) {
-    const iconCustom = document.createElement("div");
     const iconName = pageConfig.icon || 'business'; // Use the icon sent from Wix
-    iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`; 
-  let pinColor = "#01257D"; 
+    let pinColor = "#01257D"; 
 
-  if (loc.isFixed) {
-    pinColor = "#95A5A6"; 
-  }
+    if (loc.isFixed) {
+        pinColor = "#95A5A6"; 
+    }
 
-  const iconCustom = document.createElement("div");
-  iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`;
+    const iconCustom = document.createElement("div");
+    iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`;
 
-  const pin = new PinElement({
-    background: pinColor,
-    borderColor: "#FFFFFF",
-    glyph: iconCustom,
-  });
+    const pin = new PinElement({
+        background: pinColor,
+        borderColor: "#FFFFFF",
+        glyph: iconCustom,
+    });
 
-  const marker = new AdvancedMarkerElement({
-    position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
-    map: map,
-    title: loc.title,
-    content: pin.element 
-  });
+    const marker = new AdvancedMarkerElement({
+        position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
+        map: map,
+        title: loc.title,
+        content: pin.element 
+    });
 
-  marker.addListener("gmp-click", () => {
-    const modal = document.getElementById('map-modal');
-    const content = document.getElementById('modal-content');
-    
-    // 1. IMAGE LOGIC: Only show if attimage exists and isn't empty
-    const imageBlock = (loc.attimage && loc.attimage.trim() !== "") 
-      ? `<img src="${loc.attimage.replace('http://', 'https://')}" alt="${loc.title}">` 
-      : "";
+    marker.addListener("gmp-click", () => {
+        const modal = document.getElementById('map-modal');
+        const content = document.getElementById('modal-content');
+        
+        // 1. IMAGE LOGIC: Only show if attimage exists and isn't empty
+        const imageBlock = (loc.attimage && loc.attimage.trim() !== "") 
+            ? `<img src="${loc.attimage.replace('http://', 'https://')}" alt="${loc.title}">` 
+            : "";
 
-    // 2. URL LOGIC: Only show button if fullURL exists in your data
-    const detailsButton = (loc.fullURL && loc.fullURL.trim() !== "") 
-      ? `<a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>` 
-      : "";
+        // 2. URL LOGIC: Only show button if fullURL exists in your data
+        const detailsButton = (loc.fullURL && loc.fullURL.trim() !== "") 
+            ? `<a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>` 
+            : "";
 
-    // 3. SUBTITLE LOGIC: Handle truncation safely
-    const subtitleBase = loc.subtitle || '';
-    const truncatedSubtitle = subtitleBase.length > 320 
-      ? subtitleBase.substring(0, 320) + "..." 
-      : subtitleBase;
+        // 3. SUBTITLE LOGIC: Handle truncation safely
+        const subtitleBase = loc.subtitle || '';
+        const truncatedSubtitle = subtitleBase.length > 320 
+            ? subtitleBase.substring(0, 320) + "..." 
+            : subtitleBase;
 
-    content.innerHTML = `
-      <div class="info-card">
-        ${imageBlock}
-        <div class="info-header">
-          <h3>${loc.title}</h3>
-          <h4>${loc.location || ''}</h4>
-        </div>
-        <div class="info-body">
-          <p>${truncatedSubtitle}</p>
-          ${detailsButton}
-        </div>
-      </div>
-    `;
+        content.innerHTML = `
+            <div class="info-card">
+                ${imageBlock}
+                <div class="info-header">
+                    <h3>${loc.title}</h3>
+                    <h4>${loc.location || ''}</h4>
+                </div>
+                <div class="info-body">
+                    <p>${truncatedSubtitle}</p>
+                    ${detailsButton}
+                </div>
+            </div>
+        `;
 
-    modal.style.display = 'block';
-    map.panTo(marker.position);
-  });
+        modal.style.display = 'block';
+        map.panTo(marker.position);
+    });
 
-  return marker;
+    return marker;
 }
-
 
 function closeModal() {
     document.getElementById('map-modal').style.display = 'none';
