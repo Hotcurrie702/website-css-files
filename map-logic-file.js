@@ -154,7 +154,7 @@ function createMarker(loc) {
         modal.style.display = 'block';
         map.panTo(marker.position);
     });
-
+console.log(loc.title, loc.isFixed, typeof loc.isFixed);
     return marker;
 }
 
