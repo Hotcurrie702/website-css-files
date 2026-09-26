@@ -91,62 +91,70 @@ async function renderMarkers(locations) {
 }
 
 function createMarker(loc) {
-    const iconCustom = document.createElement("div");
-    const iconName = pageConfig.icon || 'business'; // Use the icon sent from Wix
-    iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`;
+  let iconName = "directions_boat"; 
+  let pinColor = "#01257D"; 
 
-    const pin = new PinElement({
-        background: "#01257D",
-        borderColor: "#FFFFFF",
-        glyph: iconCustom,
-    });
+  if (loc.isFixed) {
+    pinColor = "#95A5A6"; 
+  }
 
-    const marker = new AdvancedMarkerElement({
-        position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
-        map: map,
-        title: loc.title,
-        content: pin.element
-    });
+  const iconCustom = document.createElement("div");
+  iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`;
 
-        marker.addListener("gmp-click", () => {
-            console.warn("📍 Marker clicked: " + loc.title); // <--- ADD THIS
-            
-            const modal = document.getElementById('map-modal');
-            const content = document.getElementById('modal-content');
-            
-            // 1. Get the original text
-            let subtitle = loc.subtitle || '';
-            
-            // 2. Log the data to the console
-            console.log(`[Map Debug] Subtitles: "${subtitle}" | Count: ${subtitle.length}`);
-            
-            // 3. Apply the smart truncation
-            const truncatedSubtitle = subtitle.length > 330 
-              ? subtitle.substring(0, 330) + '...' 
-              : subtitle;
-            console.log(`[Map] Truncated Subtitle: "${truncatedSubtitle}" | Count: ${truncatedSubtitle.length}`);
-        
-        // ONLY update the content div, leaving the close button untouched
-        content.innerHTML = `
-          <div class="info-card">
-            <img src="${loc.attimage || ''}" alt="${loc.title}">
-            <div class="info-header">
-              <h3>${loc.title}</h3>
-              <h4>${loc.location || ''}</h4>
-            </div>
-            <div class="info-body">
-              <p>${truncatedSubtitle}</p>
-              <a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>
-            </div>
-          </div>
-        `;
+  const pin = new PinElement({
+    background: pinColor,
+    borderColor: "#FFFFFF",
+    glyph: iconCustom,
+  });
+
+  const marker = new AdvancedMarkerElement({
+    position: { lat: parseFloat(loc.lat), lng: parseFloat(loc.lng) },
+    map: map,
+    title: loc.title,
+    content: pin.element 
+  });
+
+  marker.addListener("gmp-click", () => {
+    const modal = document.getElementById('map-modal');
+    const content = document.getElementById('modal-content');
     
-        modal.style.display = 'block';
-        map.panTo(marker.position);
-    });
+    // 1. IMAGE LOGIC: Only show if attimage exists and isn't empty
+    const imageBlock = (loc.attimage && loc.attimage.trim() !== "") 
+      ? `<img src="${loc.attimage.replace('http://', 'https://')}" alt="${loc.title}">` 
+      : "";
 
-    return marker;
+    // 2. URL LOGIC: Only show button if fullURL exists in your data
+    const detailsButton = (loc.fullURL && loc.fullURL.trim() !== "") 
+      ? `<a href="${loc.fullURL}" target="_blank" class="btn-details">VIEW DETAILS</a>` 
+      : "";
+
+    // 3. SUBTITLE LOGIC: Handle truncation safely
+    const subtitleBase = loc.subtitle || '';
+    const truncatedSubtitle = subtitleBase.length > 320 
+      ? subtitleBase.substring(0, 320) + "..." 
+      : subtitleBase;
+
+    content.innerHTML = `
+      <div class="info-card">
+        ${imageBlock}
+        <div class="info-header">
+          <h3>${loc.title}</h3>
+          <h4>${loc.location || ''}</h4>
+        </div>
+        <div class="info-body">
+          <p>${truncatedSubtitle}</p>
+          ${detailsButton}
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'block';
+    map.panTo(marker.position);
+  });
+
+  return marker;
 }
+
 
 function closeModal() {
     document.getElementById('map-modal').style.display = 'none';
