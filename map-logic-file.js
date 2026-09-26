@@ -2,7 +2,7 @@
  * Master Map Logic for shanecurrie.id.au
  * Handles dynamic icons, zoom, and centering from Wix Page Code
  */
-console.log("🚀 MAP SCRIPT LOADED - VERSION: " + new Date().getTime());
+console.log("🚀 MAP SCRIPT LOADED - FILE VERSION: " + new Date().getTime());
 
 let map, clusterer;
 let AdvancedMarkerElement, PinElement;
