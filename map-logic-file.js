@@ -91,7 +91,9 @@ async function renderMarkers(locations) {
 }
 
 function createMarker(loc) {
-  let iconName = "flight"; 
+    const iconCustom = document.createElement("div");
+    const iconName = pageConfig.icon || 'business'; // Use the icon sent from Wix
+    iconCustom.innerHTML = `<i class="material-icons" style="color:white;font-size:18px;">${iconName}</i>`; 
   let pinColor = "#01257D"; 
 
   if (loc.isFixed) {
