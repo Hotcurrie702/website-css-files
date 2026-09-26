@@ -91,10 +91,13 @@ async function renderMarkers(locations) {
 }
 
 function createMarker(loc) {
-    const iconName = pageConfig.icon || 'business'; // Use the icon sent from Wix
+    const iconName = pageConfig.icon || 'business'; 
     let pinColor = "#01257D"; 
 
-    if (loc.isFixed) {
+    // Robust check for boolean or string values of true/1
+    const isFixedTrue = loc.isFixed === true || loc.isFixed === "true" || loc.isFixed === 1 || loc.isFixed === "1";
+
+    if (isFixedTrue) {
         pinColor = "#95A5A6"; 
     }
 
