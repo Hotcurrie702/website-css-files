@@ -91,7 +91,7 @@ async function renderMarkers(locations) {
 }
 
 function createMarker(loc) {
-  let iconName = "directions_boat"; 
+  let iconName = "flight"; 
   let pinColor = "#01257D"; 
 
   if (loc.isFixed) {
