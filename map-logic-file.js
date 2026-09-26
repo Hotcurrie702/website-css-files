@@ -42,6 +42,8 @@ async function initMap() {
 
 function setupMessageListener() {
     window.addEventListener("message", async (event) => {
+        console.log("📨 RECEIVED DATA FROM WIX:", event.data); // <-- Add this line
+
         const { css, locations, config } = event.data;
 
         // Apply Page Configuration (Center, Zoom, Icon)
@@ -64,8 +66,11 @@ function setupMessageListener() {
 
         // Render Markers
         if (Array.isArray(locations)) {
+            console.log("📍 Total locations received:", locations.length); // <-- Add this line
             await renderMarkers(locations);
             document.getElementById('loader-container').classList.add('hidden');
+        } else {
+            console.warn("⚠️ 'locations' is not an array!", locations); // <-- Add this line
         }
     });
 }
