@@ -13,7 +13,7 @@ html, body {
 /* We define these first so they are the default */
 .c1, .f1 { 
     width: 350px !important;
-    height: auto !important; 
+    height: 550px !important; 
     margin: 0 auto;
     position: relative;
     overflow: hidden;
