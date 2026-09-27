@@ -42,7 +42,7 @@ html, body {
     left: 0; 
     width: 100% !important; 
     height: 100% !important; 
-    object-fit: contain !important; 
+    object-fit: cover !important; 
     /* Default is center; no !important here so inline can override it */
     object-position: center; 
     display: block; 
