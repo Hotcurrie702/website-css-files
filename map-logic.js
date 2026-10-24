@@ -42,6 +42,7 @@ async function initMap() {
 
 function setupMessageListener() {
     window.addEventListener("message", async (event) => {
+        console.log("📨 RECEIVED DATA FROM WIX:", event.data); // <-- Add this line
         const { css, locations, config } = event.data;
 
         // Apply Page Configuration (Center, Zoom, Icon)
